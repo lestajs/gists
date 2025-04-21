@@ -19,7 +19,7 @@ jobs:
      
           curl -H "Authorization: token $GITHUB_TOKEN" \
             "https://api.github.com/gists" \
-            | jq '[.[] | select(.description | contains("LestaJS")) | {id, html_url, description, updated_at}]' \
+            | jq '[.[] | select(.description | contains("lestajs")) | {id, html_url, description, updated_at}]' \
             > gists-metadata.json
           
           if [ ! -s gists-metadata.json ]; then
