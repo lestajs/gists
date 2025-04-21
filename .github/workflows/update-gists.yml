@@ -2,11 +2,8 @@ name: Update Gists Metadata
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # 24h
+    - cron: '0 0 * * *'
   workflow_dispatch:
-    inputs:
-      reason:
-        required: true
 
 jobs:
   update:
@@ -15,19 +12,29 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Fetch metadata
+      - name: Fetch gists metadata
         env:
           GITHUB_TOKEN: ${{ secrets.GIST_API_TOKEN }}
         run: |
+     
           curl -H "Authorization: token $GITHUB_TOKEN" \
-            "https://api.github.com/gists?q=[LestaJS]%20in:description" \
-            | jq '[.[] | {id, html_url, description, updated_at}]' \
+            "https://api.github.com/gists" \
+            | jq '[.[] | select(.description | contains("LestaJS")) | {id, html_url, description, updated_at}]' \
             > gists-metadata.json
+          
+          if [ ! -s gists-metadata.json ]; then
+            echo "Warning: gists-metadata.json is empty!"
+            echo "[]" > gists-metadata.json
+          fi
 
       - name: Commit changes
         run: |
           git config --global user.email sashakosyak@yahoo.com
           git config --global user.name kossyak
-          git add gists-metadata.json
-          git commit -m "Update gist links $(date +'%Y-%m-%d')"
-          git push origin main
+          git add gists-metadata.json  
+          if git diff --cached --quiet --exit-code; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update gist links $(date +'%Y-%m-%d')"
+            git push origin main
+          fi
