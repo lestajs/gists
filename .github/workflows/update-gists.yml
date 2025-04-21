@@ -15,26 +15,19 @@ jobs:
       - name: Fetch gists metadata
         env:
           GITHUB_TOKEN: ${{ secrets.GIST_API_TOKEN }}
-        run: |
-     
-          curl -H "Authorization: token $GITHUB_TOKEN" \
-            "https://api.github.com/gists" \
-            | jq '[.[] | select(.description | contains("lestajs")) | {id, html_url, description, updated_at}]' \
-            > gists-metadata.json
-          
-          if [ ! -s gists-metadata.json ]; then
-            echo "Warning: gists-metadata.json is empty!"
-            echo "[]" > gists-metadata.json
-          fi
 
-      - name: Commit changes
+      - name: Fetch gists metadata
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIST_API_TOKEN }}
+        run: |
+          curl -H "Authorization: token $GITHUB_TOKEN" \
+            "https://api.github.com/gists?q=[lestajs]%20in:description" \
+            > gists-metadata.json
+
+      - name: Commit and push changes
         run: |
           git config --global user.email sashakosyak@yahoo.com
           git config --global user.name kossyak
-          git add gists-metadata.json  
-          if git diff --cached --quiet --exit-code; then
-            echo "No changes to commit"
-          else
-            git commit -m "Update gist links $(date +'%Y-%m-%d')"
-            git push origin main
-          fi
+          git add gists-metadata.json
+          git commit -m "Update gists metadata $(date +'%Y-%m-%d')"
+          git push origin main
