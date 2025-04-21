@@ -16,7 +16,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GIST_TOKEN }}
         run: |
-             curl -H "Authorization: token $GITHUB_TOKEN" \
+             curl "https://api.github.com/gists?per_page=100" \
              "https://api.github.com/gists?per_page=100" \
              | jq '[.[] | select(.description != null) | select(.description | contains("lestajs")) | {id, html_url, description, created_at, updated_at, owner: .owner.login, comments}] | sort_by(.created_at) | reverse' \
              > gists-metadata.json
