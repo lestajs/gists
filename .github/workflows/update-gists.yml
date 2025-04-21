@@ -17,8 +17,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GIST_TOKEN }}
         run: |
           curl -H "Authorization: token $GITHUB_TOKEN" \
-            "https://api.github.com/gists?q=[lestajs]%20in:description" \
-            > gists-metadata.json
+          "https://api.github.com/gists?q=[lestajs]in:description" \
+          | jq '[.[] | {id, html_url, description, updated_at}]' \
+          > gists-metadata.json
 
       - name: Commit and push changes
         run: |
