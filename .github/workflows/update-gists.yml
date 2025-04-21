@@ -15,10 +15,6 @@ jobs:
       - name: Fetch gists metadata
         env:
           GITHUB_TOKEN: ${{ secrets.GIST_API_TOKEN }}
-
-      - name: Fetch gists metadata
-        env:
-          GITHUB_TOKEN: ${{ secrets.GIST_API_TOKEN }}
         run: |
           curl -H "Authorization: token $GITHUB_TOKEN" \
             "https://api.github.com/gists?q=[lestajs]%20in:description" \
