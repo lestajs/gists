@@ -16,10 +16,22 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GIST_TOKEN }}
         run: |
-             curl -H "Authorization: token $GITHUB_TOKEN" \
-             "https://api.github.com/gists?per_page=100" \
-             | jq '[.[] | select(.description != null and (.description | contains("lestajs"))) | {id, html_url, description, created_at, updated_at, owner: .owner.login, comments}] | sort_by(.created_at) | reverse' \
-             > gists-metadata.json
+          curl -H "Authorization: token $GITHUB_TOKEN" \
+          "https://api.github.com/gists?per_page=10000" \
+          | jq '[.[] | select(.description != null and (.description | contains("#lestajs"))) | {
+              id,
+              html_url,
+              description: (.description | gsub("#[a-zA-Z0-9_]+"; "") | trim),
+              hashtags: (.description 
+                | [match("#[a-zA-Z0-9_]+"; "g") | .string | ascii_downcase]
+                | unique
+              ),
+              created_at,
+              updated_at,
+              owner: .owner.login,
+              comments
+            }] | sort_by(.created_at) | reverse' \
+          > gists-metadata.json
 
       - name: Commit and push changes
         run: |
