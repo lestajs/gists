@@ -31,7 +31,18 @@ jobs:
               owner: .owner.login,
               comments
             }] | sort_by(.created_at) | reverse' \
-          > gists-metadata.json
+          > temp.json
+          
+          jq '
+            {
+              total: length,
+              updated_at: now | todateiso8601,
+              hashtags: (map(.hashtags[]) | unique),
+              gists: .
+            }
+          ' temp.json > gists-metadata.json
+
+          rm temp.json
 
       - name: Commit and push changes
         run: |
