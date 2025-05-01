@@ -21,7 +21,7 @@ jobs:
           | jq '[.[] | select(.description != null and (.description | contains("#lestajs"))) | {
               id,
               html_url,
-              description: (.description | gsub("#[a-zA-Z0-9_]+"; "") | trim),
+              description: (.description | gsub("#[a-zA-Z0-9_]+"; "") | sub("^\\s+"; "") | sub("\\s+$"; "")),
               hashtags: (.description 
                 | [match("#[a-zA-Z0-9_]+"; "g") | .string | ascii_downcase]
                 | unique
