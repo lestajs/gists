@@ -18,7 +18,7 @@ jobs:
         run: |
           curl -H "Authorization: token $GITHUB_TOKEN" \
           "https://api.github.com/gists?per_page=10000" \
-          | jq '[.[] | select(.description != null and (.description | contains("#lestajs"))) | {
+          | jq '[.[] | select(.description != null and (.description | contains("lestajs"))) | {
               id,
               html_url,
               description: (.description | gsub("#[a-zA-Z0-9_]+"; "") | sub("^\\s+"; "") | sub("\\s+$"; "")),
