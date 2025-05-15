@@ -3,7 +3,7 @@
 
 ## Creation
 
-Create a gist at gist.github.com using this description format: "Short summary. #lestajs #yourtag #anothertag".  
+Create a gist at gist.github.com using this description format: "Short summary. #lestajs #your_tag #another_tag".  
 > You can add the full details in the first comment.
 
 ## Blacklist
