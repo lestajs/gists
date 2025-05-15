@@ -1,15 +1,33 @@
 {
-  "total": 2,
-  "updated_at": "2025-05-14T01:22:00Z",
+  "total": 3,
+  "updated_at": "2025-05-15T01:20:10Z",
   "hashtags": [
+    "context",
     "events",
     "keydown",
     "lestajs",
+    "nodes",
     "scroll",
     "switch",
+    "this",
     "throttle"
   ],
   "gists": [
+    {
+      "id": "fd31db8dd9a050ec61ecce856e7633c3",
+      "html_url": "https://gist.github.com/kossyak/fd31db8dd9a050ec61ecce856e7633c3",
+      "description": "Context of this in nodes() function.",
+      "hashtags": [
+        "context",
+        "lestajs",
+        "nodes",
+        "this"
+      ],
+      "created_at": "2025-05-14T10:03:14Z",
+      "updated_at": "2025-05-14T10:04:51Z",
+      "owner": "kossyak",
+      "comments": 0
+    },
     {
       "id": "21a257b3f1c74edf993b3ceacb14baf1",
       "html_url": "https://gist.github.com/kossyak/21a257b3f1c74edf993b3ceacb14baf1",
