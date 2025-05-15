@@ -1,5 +1,11 @@
 # Gists LestaJS
 
+
+## Creation
+
+Create a gist at gist.github.com using this description format: "Short summary #lestajs #yourtag #anothertag".  
+> You can add the full details in the first comment.
+
 ## Blacklist
 
 - Open `blacklist.csv` in GitHub’s interface.
