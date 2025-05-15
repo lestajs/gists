@@ -16,6 +16,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GIST_TOKEN }}
         run: |
+          if [ -f blacklist.csv ]; then
+            blacklist_ids=$(cat blacklist.csv | tr '\n' ',' | sed 's/,$//')
+          else
+            blacklist_ids=""
+          fi
           curl -H "Authorization: token $GITHUB_TOKEN" \
           "https://api.github.com/gists?per_page=10000" \
           | jq '[.[] | select(.description != null and (.description | contains("lestajs"))) | {
@@ -30,7 +35,9 @@ jobs:
               updated_at,
               owner: .owner.login,
               comments
-            }] | sort_by(.created_at) | reverse' \
+            }] | 
+            map(select(.id as $id | $blacklist_ids | index($id) | not)) |
+            sort_by(.created_at) | reverse' \
           > temp.json
           
           jq '
