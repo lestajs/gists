@@ -1,0 +1,23 @@
+:root:active-view-transition {
+  --view-transition-active: 1;
+}
+#root > * {
+  opacity: 1;
+  transition: opacity .3s ease;
+}
+
+:root:active-view-transition #root :where(h1, #root > *:not(header)) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.middle-block {
+  position: relative;
+}
+h1 {
+  width: 100%;
+  font-size: 30px;
+  text-align: center;
+  position: absolute;
+  margin-top: -54px;
+}

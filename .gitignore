@@ -1,0 +1,4 @@
+node_modules
+dist
+.idea
+gists-metadata.json

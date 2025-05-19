@@ -1,0 +1,124 @@
+header {
+  width: 100%;
+  position: sticky;
+  background-color: white;
+  top: 0;
+  z-index: 1;
+  padding: 12px 0;
+}
+.search-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.search-info {
+  display: flex;
+  gap: 6px;
+  color: var(--gray-font);
+}
+.search-buttons {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+.dropdown {
+  position: absolute;
+  background-color: white;
+  border: 1px solid var(--gray);
+  border-radius: 16px;
+  padding: 16px;
+  top: calc(100% + 4px);
+  right: 0;
+  min-width: 298px;
+  b {
+    display: block;
+    margin: 4px 0;
+  }
+  button {
+    margin-top: 6px;
+    margin-left: auto;
+  }
+}
+article {
+  padding: 18px 0;
+  h3 {
+    font-size: 24px;
+    line-height: 1;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  a:hover h3 {
+    color: var(--black);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1.2px;
+  }
+  .time {
+    color: var(--gray-font);
+    font-size: 14px;
+  }
+  .icons {
+    margin-top: 8px;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    column-gap: 16px;
+    row-gap: 4px;
+    div {
+      display: flex;
+      align-items: start;
+      gap: 4px;
+    }
+    svg {
+      min-width: 16px;
+      width: 16px;
+      transform: translateY(.1em);
+    }
+    div:not(:last-child) span {
+      text-wrap: nowrap;
+    }
+    a {
+      padding: .3em;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: var(--gray-font);
+    }
+    a:hover {
+      text-decoration-color: inherit;
+    }
+  }
+}
+main {
+  padding: 20px 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+nav {
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  gap: 24px;
+  color: var(--gray-font);
+  button {
+    color: var(--black);
+  }
+}
+nav > * {
+  padding: 4px 8px;
+}
+footer {
+  padding-bottom: 30px;
+  font-size: 14px;
+  div {
+    text-align: center;
+    color: var(--gray-font);
+    margin-top: 60px;
+    a {
+      color: var(--black);
+    }
+  }
+}
