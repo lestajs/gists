@@ -16,10 +16,41 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GIST_TOKEN }}
         run: |
-             curl -H "Authorization: token $GITHUB_TOKEN" \
-             "https://api.github.com/gists?per_page=100" \
-             | jq '[.[] | select(.description != null and (.description | contains("lestajs"))) | {id, html_url, description, created_at, updated_at, owner: .owner.login, comments}] | sort_by(.created_at) | reverse' \
-             > gists-metadata.json
+          if [ -f blacklist.csv ]; then
+            blacklist_json=$(jq -R -n '[inputs]' < blacklist.csv)
+          else
+            blacklist_json='[]'
+          fi
+          curl -H "Authorization: token $GITHUB_TOKEN" \
+          "https://api.github.com/gists?per_page=10000" \
+          | jq --argjson blacklist "$blacklist_json" '
+            [.[] | select(.description != null and (.description | contains("lestajs"))) | {
+              id,
+              html_url,
+              description: (.description | gsub("#[a-zA-Z0-9_]+"; "") | sub("^\\s+"; "") | sub("\\s+$"; "")),
+              hashtags: (.description 
+                | [match("#[a-zA-Z0-9_]+"; "g") | .string | sub("^#"; "") | ascii_downcase | gsub("[^a-z0-9_]"; "")]
+                | unique
+              ),
+              created_at,
+              updated_at,
+              owner: .owner.login,
+              comments
+            }] | 
+            map(select(.id as $id | $blacklist | index($id) | not)) |
+            sort_by(.created_at) | reverse' \
+          > temp.json
+          
+          jq '
+            {
+              total: length,
+              updated_at: now | todateiso8601,
+              hashtags: (map(.hashtags[]) | unique),
+              gists: .
+            }
+          ' temp.json > gists-metadata.json
+
+          rm temp.json
 
       - name: Commit and push changes
         run: |
