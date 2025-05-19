@@ -23,7 +23,6 @@ const app = {
 	},
 	mountWidgetSearch: (node) => mountWidget(app.widgets.search, node, app),
 	transition: async () => {
-		console.log(app.widget.nodepath)
 		if (app.widget.nodepath !== 'home') return
 		const transition = document.startViewTransition(() => app.mountWidget('results'))
 		await transition.finished

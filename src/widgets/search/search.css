@@ -60,6 +60,7 @@
   border: 1px solid var(--gray);
   border-radius: 24px;
   padding: 10px;
+  height: 44px;
 }
 
 .search-container:has(ul:not(:empty)) .search-wrapper {

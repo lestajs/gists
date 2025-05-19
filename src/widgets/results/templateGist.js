@@ -8,7 +8,7 @@ export default function (gist) {
 				<a href="${gist.html_url}" target="_blank" rel="noopener noreferrer">
 					<h3>${description || 'No description'}</h3>
 				</a>
-				<div class="time">Created ${gist.created_ago} / Updated ${gist.updated_ago}</div>
+				<div class="time">created ${gist.created_ago} / updated ${gist.updated_ago}</div>
 				<div class="icons">
 					<div>
 						<svg version="1.1"  fill="none" stroke="#101010" stroke-width="8" stroke-miterlimit="10"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">

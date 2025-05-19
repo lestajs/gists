@@ -110,15 +110,3 @@ nav {
 nav > * {
   padding: 4px 8px;
 }
-footer {
-  padding-bottom: 30px;
-  font-size: 14px;
-  div {
-    text-align: center;
-    color: var(--gray-font);
-    margin-top: 60px;
-    a {
-      color: var(--black);
-    }
-  }
-}

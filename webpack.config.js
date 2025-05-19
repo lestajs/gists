@@ -32,7 +32,15 @@ module.exports = (env) => ({ // env.production
 				use: {
 					loader: 'html-loader',
 					options: {
-						minimize: true
+						minimize: true,
+						sources: {
+							urlFilter: (attribute, value, resourcePath) => {
+								if (/\.(png|jpg|jpeg|gif|svg)$/.test(value)) {
+									return true
+								}
+								return false
+							},
+						},
 					},
 				},
 			},
@@ -44,6 +52,9 @@ module.exports = (env) => ({ // env.production
 			{
 				test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/,
 				type: "asset/resource",
+				generator: {
+					filename: 'assets/[hash][ext]'
+				}
 			},
 			{
 				test: /\.css$/,
