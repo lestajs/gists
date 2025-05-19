@@ -3,14 +3,14 @@ const HtmlWebpackPlugin = require("html-webpack-plugin")
 const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
-module.exports = (env) => ({
+module.exports = (env) => ({ // env.production
 	entry: {
 		main: './src/index.js',
 	},
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: 'main.js',
-		publicPath: env.production ? '/gists/' : '/',
+		publicPath: '/',
 	},
 	mode: 'development',
 	devServer: {
