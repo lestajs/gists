@@ -1,3 +1,5 @@
+<img src="https://github.com/user-attachments/assets/15f0754e-9666-40fa-9df9-eaeec486e662" width="90" alt="Иконка">
+
 # Gists LestaJS
 This repository acts as a central platform for sharing LestaJS code snippets, examples, and extensions, promoting community development and easier knowledge sharing.
 
