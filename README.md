@@ -2,7 +2,7 @@
 This repository acts as a central platform for sharing LestaJS code snippets, examples, and extensions, promoting community development and easier knowledge sharing.
 
 ## How to Submit a Gist
-1. Create a gist at [gist.github.com](gist.github.com) using this description format:
+1. Create a gist at [gist.github.com](https://gist.github.com) using this description format:
 "Short summary. #lestajs #your_tag #another_tag"
 2. Include files with meaningful names.
 3. Add full details in the first comment (optional but recommended).
